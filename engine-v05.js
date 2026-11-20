@@ -1,0 +1,9 @@
+(function(root){"use strict";
+function run(seed,budget,mode="adaptive"){let x=seed>>>0,rand=()=>{x=(Math.imul(x,1664525)+1013904223)>>>0;return x/4294967296},pick=n=>Math.floor(rand()*n),ops=["and","or","xor","imp"],expr=n=>[ops[pick(4)],pick(n),pick(n)],archive=new Map(),seen=new Set(),attempts=0,duplicates=0,stale=0,stats=[{n:0,g:0},{n:0,g:0},{n:0,g:0}];
+while(seen.size<budget&&attempts<budget*20){attempts++;let parents=[...archive.values()],arm=0;
+if(mode==="adaptive"&&parents.length){let untried=stats.findIndex(s=>!s.n);arm=stale>=12?0:untried>=0?untried:stats.map(s=>s.g/s.n+Math.sqrt(2*Math.log(attempts)/s.n)).reduce((best,v,i,arr)=>v>arr[best]?i:best,0)}
+stats[arm].n++;let r;if(!arm){let n=2+pick(5);r=Array.from({length:n},()=>expr(n))}else{let p=parents[pick(parents.length)],q=parents[pick(parents.length)];if(q.hits<p.hits)p=q;p.hits++;r=JSON.parse(JSON.stringify(p.r));if(arm===2){if(r.length===2||(r.length<6&&rand()<.5))r.push(expr(r.length+1));else{let removed=r.length-1;r.pop();r=r.map(e=>e.map((v,j)=>j&&v===removed?pick(r.length):v))}}r[pick(r.length)]=expr(r.length)}
+let signature=JSON.stringify(r.map(e=>e[0]==="imp"?e:[e[0],...e.slice(1).sort((a,b)=>a-b)]));if(seen.has(signature)){duplicates++;stale++;continue}seen.add(signature);let c=root.ParadoxV3.solve(r).count,self=r.filter((e,j)=>e.slice(1).includes(j)).length,key=[r.length,c?1:0,self].join(":"),old=archive.get(key),score=c?Math.log2(c):root.ParadoxV3.core(r).length;
+if(!old){stats[arm].g++;stale=0}else stale++;if(!old||score>old.score)archive.set(key,{r,score,hits:old?.hits??0})}
+return {coverage:archive.size,attempts,evaluations:seen.size,duplicates,stats}}
+root.ParadoxV5={run};})(globalThis);
