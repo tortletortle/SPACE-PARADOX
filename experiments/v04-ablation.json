@@ -1,0 +1,321 @@
+{
+  "budget": 100,
+  "configs": {
+    "random": {
+      "rate": 0
+    },
+    "original": {},
+    "rate": {
+      "rate": 0.4
+    },
+    "resize": {
+      "resize": true
+    },
+    "neutral": {
+      "neutral": true
+    },
+    "combined": {
+      "rate": 0.4,
+      "resize": true
+    }
+  },
+  "rows": [
+    {
+      "seed": 1,
+      "random": 31,
+      "original": 22,
+      "rate": 31,
+      "resize": 22,
+      "neutral": 25,
+      "combined": 27
+    },
+    {
+      "seed": 2,
+      "random": 33,
+      "original": 24,
+      "rate": 33,
+      "resize": 30,
+      "neutral": 24,
+      "combined": 27
+    },
+    {
+      "seed": 3,
+      "random": 29,
+      "original": 17,
+      "rate": 25,
+      "resize": 27,
+      "neutral": 17,
+      "combined": 30
+    },
+    {
+      "seed": 4,
+      "random": 28,
+      "original": 24,
+      "rate": 26,
+      "resize": 26,
+      "neutral": 24,
+      "combined": 33
+    },
+    {
+      "seed": 5,
+      "random": 34,
+      "original": 21,
+      "rate": 28,
+      "resize": 25,
+      "neutral": 24,
+      "combined": 28
+    },
+    {
+      "seed": 6,
+      "random": 29,
+      "original": 21,
+      "rate": 30,
+      "resize": 20,
+      "neutral": 21,
+      "combined": 27
+    },
+    {
+      "seed": 7,
+      "random": 27,
+      "original": 24,
+      "rate": 25,
+      "resize": 22,
+      "neutral": 24,
+      "combined": 32
+    },
+    {
+      "seed": 8,
+      "random": 30,
+      "original": 22,
+      "rate": 26,
+      "resize": 29,
+      "neutral": 22,
+      "combined": 28
+    },
+    {
+      "seed": 9,
+      "random": 30,
+      "original": 26,
+      "rate": 27,
+      "resize": 28,
+      "neutral": 27,
+      "combined": 29
+    },
+    {
+      "seed": 10,
+      "random": 33,
+      "original": 21,
+      "rate": 26,
+      "resize": 29,
+      "neutral": 24,
+      "combined": 29
+    },
+    {
+      "seed": 11,
+      "random": 32,
+      "original": 24,
+      "rate": 26,
+      "resize": 32,
+      "neutral": 24,
+      "combined": 30
+    },
+    {
+      "seed": 12,
+      "random": 34,
+      "original": 22,
+      "rate": 29,
+      "resize": 19,
+      "neutral": 23,
+      "combined": 27
+    },
+    {
+      "seed": 13,
+      "random": 26,
+      "original": 24,
+      "rate": 27,
+      "resize": 25,
+      "neutral": 25,
+      "combined": 27
+    },
+    {
+      "seed": 14,
+      "random": 30,
+      "original": 17,
+      "rate": 32,
+      "resize": 25,
+      "neutral": 26,
+      "combined": 26
+    },
+    {
+      "seed": 15,
+      "random": 29,
+      "original": 21,
+      "rate": 26,
+      "resize": 27,
+      "neutral": 22,
+      "combined": 30
+    },
+    {
+      "seed": 16,
+      "random": 31,
+      "original": 19,
+      "rate": 27,
+      "resize": 32,
+      "neutral": 19,
+      "combined": 31
+    },
+    {
+      "seed": 17,
+      "random": 32,
+      "original": 20,
+      "rate": 31,
+      "resize": 30,
+      "neutral": 20,
+      "combined": 26
+    },
+    {
+      "seed": 18,
+      "random": 27,
+      "original": 24,
+      "rate": 25,
+      "resize": 29,
+      "neutral": 23,
+      "combined": 33
+    },
+    {
+      "seed": 19,
+      "random": 29,
+      "original": 19,
+      "rate": 29,
+      "resize": 20,
+      "neutral": 20,
+      "combined": 33
+    },
+    {
+      "seed": 20,
+      "random": 28,
+      "original": 24,
+      "rate": 27,
+      "resize": 28,
+      "neutral": 27,
+      "combined": 27
+    },
+    {
+      "seed": 21,
+      "random": 32,
+      "original": 24,
+      "rate": 27,
+      "resize": 28,
+      "neutral": 24,
+      "combined": 29
+    },
+    {
+      "seed": 22,
+      "random": 28,
+      "original": 21,
+      "rate": 27,
+      "resize": 26,
+      "neutral": 21,
+      "combined": 29
+    },
+    {
+      "seed": 23,
+      "random": 29,
+      "original": 20,
+      "rate": 28,
+      "resize": 28,
+      "neutral": 21,
+      "combined": 29
+    },
+    {
+      "seed": 24,
+      "random": 28,
+      "original": 24,
+      "rate": 26,
+      "resize": 25,
+      "neutral": 25,
+      "combined": 27
+    },
+    {
+      "seed": 25,
+      "random": 27,
+      "original": 25,
+      "rate": 33,
+      "resize": 28,
+      "neutral": 26,
+      "combined": 31
+    },
+    {
+      "seed": 26,
+      "random": 35,
+      "original": 22,
+      "rate": 28,
+      "resize": 26,
+      "neutral": 23,
+      "combined": 26
+    },
+    {
+      "seed": 27,
+      "random": 30,
+      "original": 20,
+      "rate": 29,
+      "resize": 26,
+      "neutral": 20,
+      "combined": 32
+    },
+    {
+      "seed": 28,
+      "random": 31,
+      "original": 25,
+      "rate": 27,
+      "resize": 27,
+      "neutral": 23,
+      "combined": 27
+    },
+    {
+      "seed": 29,
+      "random": 29,
+      "original": 26,
+      "rate": 25,
+      "resize": 30,
+      "neutral": 27,
+      "combined": 27
+    },
+    {
+      "seed": 30,
+      "random": 25,
+      "original": 23,
+      "rate": 27,
+      "resize": 30,
+      "neutral": 24,
+      "combined": 26
+    }
+  ],
+  "summary": {
+    "random": {
+      "mean": 29.866666666666667,
+      "wins": 0
+    },
+    "original": {
+      "mean": 22.2,
+      "wins": 0
+    },
+    "rate": {
+      "mean": 27.766666666666666,
+      "wins": 5
+    },
+    "resize": {
+      "mean": 26.633333333333333,
+      "wins": 5
+    },
+    "neutral": {
+      "mean": 23.166666666666668,
+      "wins": 0
+    },
+    "combined": {
+      "mean": 28.766666666666666,
+      "wins": 11
+    }
+  },
+  "metric": "occupied structural bins; no LLM calls"
+}
