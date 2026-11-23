@@ -40,10 +40,12 @@ async function runSuite(adapter,items,{modelId="unknown",repeats=3}={}){
 }
 async function minimizeStable(rules,adapter,{modelId="unknown",repeats=3,minStable=2}={}){
  let calls=0;
- const predicate=async candidate=>{const rows=[];for(let i=0;i<repeats;i++){calls++;try{const c=core.makeChallenge(candidate,"minimize-"+calls),raw=await adapter(core.makePrompt(c),{modelId,trial:i});rows.push(core.validate(candidate,raw));}catch(e){rows.push({valid:false,error:"ADAPTER_ERROR"});}}
-  const f=stableFailure(rows,minStable);return !!f&&f.error!=="ADAPTER_ERROR";};
+ async function evaluate(candidate){const rows=[];for(let i=0;i<repeats;i++){calls++;try{const c=core.makeChallenge(candidate,"minimize-"+calls),raw=await adapter(core.makePrompt(c),{modelId,trial:i});rows.push(core.validate(candidate,raw));}catch(e){rows.push({valid:false,error:"ADAPTER_ERROR"});}}return rows;}
+ const baseline=stableFailure(await evaluate(rules),minStable);
+ if(!baseline||baseline.error==="ADAPTER_ERROR")return {rules,checks:0,modelId,adapterCalls:calls,stableFailure:null,warning:"Baseline failure was not stable; minimization skipped."};
+ const predicate=async candidate=>{const failure=stableFailure(await evaluate(candidate),minStable);return !!failure&&failure.error===baseline.error;};
  const result=await metamorphic.minimize(rules,predicate);
- return {...result,modelId,adapterCalls:calls,warning:"1-minimal under implemented operators; confirm minimized case and parent in a fresh run."};
+ return {...result,modelId,adapterCalls:calls,stableFailure:baseline,warning:"1-minimal under implemented operators; confirm minimized case and parent in a fresh run."};
 }
 function report(runs){const all=runs.flatMap(x=>x.records),models=[...new Set(all.map(x=>x.modelId))];return {createdAt:new Date().toISOString(),models:fingerprints(models,all),transfer:transferMatrix(all),records:all};}
 function fingerprints(models,records){return models.map(id=>fingerprint(id,records.filter(x=>x.modelId===id)));}
