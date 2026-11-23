@@ -30,7 +30,7 @@ async function minimize(r,predicate){let current=clone(r),checks=0,changed=true;
  // Remove a rule's constraint by replacing it with tautology Xi = Xi.
  for(let i=0;i<current.length;i++){const candidate=clone(current);candidate[i]=i;if(JSON.stringify(candidate)===JSON.stringify(current))continue;if(await predicate(candidate)){current=candidate;checks++;changed=true;break;}checks++;}
  if(changed)continue;
- outer:for(let i=0;i<current.length;i++){for(const item of simplifyExpr(current[i])){const candidate=clone(current);candidate[i]=replaceAt(candidate[i],item.path,item.replacement);if(await predicate(candidate)){current=candidate;checks++;changed=true;break outer;}checks++;}}
+ outer:for(let i=0;i<current.length;i++){for(const item of simplifyExpr(current[i])){const candidate=clone(current);candidate[i]=replaceAt(candidate[i],item.path,item.replacement);if(JSON.stringify(candidate)===JSON.stringify(current))continue;if(await predicate(candidate)){current=candidate;checks++;changed=true;break outer;}checks++;}}
  }
  return {rules:current,checks};
 }
