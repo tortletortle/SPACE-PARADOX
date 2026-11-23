@@ -10,7 +10,7 @@ function createOpenAICompatibleAdapter(options={}) {
  if(!model)throw Error("Missing PARADOX_MODEL");
  if(typeof fetchImpl!=="function")throw Error("A fetch implementation is required");
  return async function adapter(prompt,context={}) {
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeoutMs);
+  const Controller=options.AbortController||globalThis.AbortController;\n  const controller=Controller?new Controller():null;\n  const timer=controller?setTimeout(()=>controller.abort(),timeoutMs):null;
   try {
    const response=await fetchImpl(baseURL+"/chat/completions",{
     method:"POST",
@@ -24,7 +24,7 @@ function createOpenAICompatibleAdapter(options={}) {
      temperature:0,
      response_format:{type:"json_object"}
     }),
-    signal:controller.signal
+    ...(controller?{signal:controller.signal}:{})
    });
    const text=await response.text();
    if(!response.ok)throw Error("Provider HTTP "+response.status+": "+text.slice(0,1000));
@@ -32,7 +32,7 @@ function createOpenAICompatibleAdapter(options={}) {
    const content=payload&&payload.choices&&payload.choices[0]&&payload.choices[0].message&&payload.choices[0].message.content;
    if(typeof content!=="string")throw Error("Provider response missing choices[0].message.content");
    try{return JSON.parse(content)}catch(e){throw Error("Model content is not valid JSON: "+content.slice(0,500))}
-  } finally {clearTimeout(timer);}
+  } finally {if(timer!==null)clearTimeout(timer);}
  };
 }
 module.exports={createOpenAICompatibleAdapter};
