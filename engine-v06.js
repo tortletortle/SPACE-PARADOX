@@ -21,9 +21,9 @@ function solve(r,ids) {
  }
  return {sat:count>0,count,witness};
 }
-function core(r) {
- if(solve(r).sat)return null;
- let ids=r.map((_,i)=>i);
+function core(r,initialIds) {
+ let ids=initialIds?initialIds.slice():r.map((_,i)=>i);
+ if(solve(r,ids).sat)return null;
  for(const i of ids.slice()){const next=ids.filter(j=>j!==i);if(!solve(r,next).sat)ids=next;}
  return ids;
 }
@@ -38,7 +38,7 @@ function validate(r,a) {
   return r.every((e,i)=>v[i]===ev(e,v))?{valid:true}:{valid:false,error:"INVALID_ASSIGNMENT"};
  }
  if(!Array.isArray(a.core)||!a.core.length||a.core.some(i=>!Number.isInteger(i)||i<0||i>=r.length)||new Set(a.core).size!==a.core.length)return {valid:false,error:"INVALID_CORE"};
- return solve(r,a.core).sat?{valid:false,error:"CORE_NOT_UNSAT"}:{valid:true,minimalCore:core(a.core.map(i=>r[i]))};
+ return solve(r,a.core).sat?{valid:false,error:"CORE_NOT_UNSAT"}:{valid:true,minimalCore:core(r,a.core)};
 }
 function makeChallenge(r,id){return {id:id||"local",semantics:"classical Boolean fixed-point equations; all equations hold simultaneously",rules:r.map((e,i)=>"X"+i+" = "+JSON.stringify(e)),variables:r.map((_,i)=>"X"+i),required:"JSON: SAT with complete assignment, or UNSAT with zero-based unsatisfiable rule indices"};}
 function makePrompt(c){return "Solve exactly under the stated classical Boolean semantics. Do not modify rules. Return JSON only.\n"+JSON.stringify(c);}
