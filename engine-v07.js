@@ -28,7 +28,7 @@ function simplifyExpr(e){if(Number.isInteger(e))return [];if(e[0]==="not")return
 function replaceAt(e,path,value){if(!path.length)return clone(value);const c=clone(e);let p=c;for(let i=0;i<path.length-1;i++)p=p[path[i]];p[path[path.length-1]]=clone(value);return c;}
 async function minimize(r,predicate){let current=clone(r),checks=0,changed=true;while(changed){changed=false;
  // Remove a rule's constraint by replacing it with tautology Xi = Xi.
- for(let i=0;i<current.length;i++){const candidate=clone(current);candidate[i]=i;if(await predicate(candidate)){current=candidate;checks++;changed=true;break;}checks++;}
+ for(let i=0;i<current.length;i++){const candidate=clone(current);candidate[i]=i;if(JSON.stringify(candidate)===JSON.stringify(current))continue;if(await predicate(candidate)){current=candidate;checks++;changed=true;break;}checks++;}
  if(changed)continue;
  outer:for(let i=0;i<current.length;i++){for(const item of simplifyExpr(current[i])){const candidate=clone(current);candidate[i]=replaceAt(candidate[i],item.path,item.replacement);if(await predicate(candidate)){current=candidate;checks++;changed=true;break outer;}checks++;}}
  }
