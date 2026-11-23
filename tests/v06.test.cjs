@@ -1,4 +1,4 @@
-const assert=require('assert'); const p=require('../engine-v06.js'); const u=[['not',0]], s=[['not',1],['not',0]];
+const assert=require('assert'); require('../engine-v06.js'); const p=globalThis.ParadoxLab06; const u=[['not',0]], s=[['not',1],['not',0]];
 assert.equal(p.solve(u).sat,false); assert.equal(p.solve(s).count,2); assert.deepEqual(p.core(u),[0]);
 assert.equal(p.validate(s,{status:'SAT',assignment:{X0:0,X1:1}}).valid,true);
 assert.equal(p.validate(s,{status:'UNSAT',core:[0,1]}).error,'FALSE_UNSAT');
