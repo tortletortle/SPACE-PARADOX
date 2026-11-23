@@ -10,7 +10,9 @@ function createOpenAICompatibleAdapter(options={}) {
  if(!model)throw Error("Missing PARADOX_MODEL");
  if(typeof fetchImpl!=="function")throw Error("A fetch implementation is required");
  return async function adapter(prompt,context={}) {
-  const Controller=options.AbortController||globalThis.AbortController;\n  const controller=Controller?new Controller():null;\n  const timer=controller?setTimeout(()=>controller.abort(),timeoutMs):null;
+  const Controller=options.AbortController||globalThis.AbortController;;
+  const controller=Controller?new Controller():null;;
+  const timer=controller?setTimeout(()=>controller.abort(),timeoutMs):null;
   try {
    const response=await fetchImpl(baseURL+"/chat/completions",{
     method:"POST",
